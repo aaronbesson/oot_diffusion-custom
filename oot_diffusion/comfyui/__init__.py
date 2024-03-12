@@ -43,8 +43,8 @@ class OOTDGenerate:
                 "cloth_image": ("IMAGE",),
                 "model_image": ("IMAGE",),
                 # Openpose from comfyui-controlnet-aux not work
-                "keypoints": ("POSE_KEYPOINT",),
-                "category": ("STRING", ["upperbody", "lowerbody", "dress"]),
+                # "keypoints": ("POSE_KEYPOINT",),
+                # "category": ("STRING", ["upperbody", "lowerbody", "dress"]),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xFFFFFFFFFFFFFFFF}),
                 "steps": ("INT", {"default": 20, "min": 1, "max": 10000}),
                 "cfg": (
@@ -66,8 +66,8 @@ class OOTDGenerate:
 
     CATEGORY = "OOTD"
 
-    def generate(self, pipe, cloth_image, model_image, seed, steps, cfg, category):
-        # category = "upperbody"
+    def generate(self, pipe, cloth_image, model_image, seed, steps, cfg):
+        category = "lowerbody"
         # if model_image.shape != (1, 1024, 768, 3) or (
         #     cloth_image.shape != (1, 1024, 768, 3)
         # ):
