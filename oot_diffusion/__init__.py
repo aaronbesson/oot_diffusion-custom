@@ -69,7 +69,7 @@ class OOTDiffusionModel:
         pipe,
         cloth_path: str | bytes | Path | Image.Image,
         model_path: str | bytes | Path | Image.Image,
-        category,  # Pass category to generate_static
+        category: str,  # Pass category to generate_static
         hg_root: str = None,
         seed=0,
         steps=10,
