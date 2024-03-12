@@ -66,7 +66,7 @@ class OOTDGenerate:
 
     CATEGORY = "OOTD"
 
-    def generate(self, pipe, cloth_image, model_image, seed, steps, cfg):
+    def generate(self, pipe, cloth_image, model_image, seed, steps, cfg, category):
         # category = "upperbody"
         # if model_image.shape != (1, 1024, 768, 3) or (
         #     cloth_image.shape != (1, 1024, 768, 3)
@@ -77,7 +77,6 @@ class OOTDGenerate:
         #     )
 
         # (1,H,W,3) -> (3,H,W)
-        category = _category_get_mask_input[self.category]
         model_image = model_image.squeeze(0)
         model_image = model_image.permute((2, 0, 1))
         model_image = to_pil_image(model_image)

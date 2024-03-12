@@ -41,8 +41,8 @@ Generate image
 def generate_image():
   model = get_ootd_model()
   generated_images, mask_image = model.generate(
-      model_path="/YOUR_MODEL.jpg",
-      cloth_path="/YOUR_GARMENT.jpg",
+      model_path="/models/eva/Eva_0.png",
+      cloth_path="/garments/bottom1.png",
       steps=10,
       cfg=2.0,
       num_samples=2,
