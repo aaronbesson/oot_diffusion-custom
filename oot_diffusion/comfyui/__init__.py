@@ -44,7 +44,7 @@ class OOTDGenerate:
                 "model_image": ("IMAGE",),
                 # Openpose from comfyui-controlnet-aux not work
                 # "keypoints": ("POSE_KEYPOINT",),
-                # "category": ("STRING", ["upperbody", "lowerbody", "dress"]),
+                "category": ("STRING", ["upperbody", "lowerbody", "dress"]),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xFFFFFFFFFFFFFFFF}),
                 "steps": ("INT", {"default": 20, "min": 1, "max": 10000}),
                 "cfg": (
