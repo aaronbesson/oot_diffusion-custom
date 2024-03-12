@@ -77,6 +77,7 @@ class OOTDGenerate:
         #     )
 
         # (1,H,W,3) -> (3,H,W)
+        category = category.lower()
         model_image = model_image.squeeze(0)
         model_image = model_image.permute((2, 0, 1))
         model_image = to_pil_image(model_image)

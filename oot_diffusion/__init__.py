@@ -46,6 +46,7 @@ class OOTDiffusionModel:
         self,
         cloth_path: str | bytes | Path | Image.Image,
         model_path: str | bytes | Path | Image.Image,
+        category: str,  # Added category as an argument
         seed=0,
         steps=10,
         cfg=2.0,
@@ -55,6 +56,7 @@ class OOTDiffusionModel:
             self.get_pipe(),
             cloth_path,
             model_path,
+            category,  # Pass category to generate_static
             self.hg_root,
             seed,
             steps,
@@ -67,6 +69,7 @@ class OOTDiffusionModel:
         pipe,
         cloth_path: str | bytes | Path | Image.Image,
         model_path: str | bytes | Path | Image.Image,
+        category,  # Pass category to generate_static
         hg_root: str = None,
         seed=0,
         steps=10,
@@ -76,7 +79,8 @@ class OOTDiffusionModel:
         if hg_root is None:
             hg_root = DEFAULT_HG_ROOT
 
-        category = "upperbody"
+        if category not in _category_get_mask_input:
+            raise ValueError(f"Invalid category '{category}'. Must be one of {list(_category_get_mask_input.keys())}.")
 
         if isinstance(cloth_path, Image.Image):
             cloth_image = cloth_path
@@ -93,7 +97,7 @@ class OOTDiffusionModel:
         keypoints = OpenPose(hg_root)(model_image.resize((384, 512)))
         mask, mask_gray = get_mask_location(
             pipe.model_type,
-            _category_get_mask_input[category],
+            _category_get_mask_input[category],  # Use 'category' from input
             model_parse,
             keypoints,
             width=384,
@@ -104,7 +108,7 @@ class OOTDiffusionModel:
 
         masked_vton_img = Image.composite(mask_gray, model_image, mask)
         images = pipe(
-            category=category,
+            category=category,  # Use 'category' from input
             image_garm=cloth_image,
             image_vton=masked_vton_img,
             mask=mask,
